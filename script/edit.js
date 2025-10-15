@@ -87,6 +87,7 @@ submitBtn.addEventListener('click', function() {
         vaccinated: vaccinatedInput.checked,
         dewormed: dewormedInput.checked,
         sterilized: sterilizedInput.checked,
+        date: new Date(),
     }
     localStorage.setItem('petArr', JSON.stringify(petArr));
     formContainer.classList.add('hide');

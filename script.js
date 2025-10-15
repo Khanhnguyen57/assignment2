@@ -14,8 +14,9 @@ const sterilizedInput = document.getElementById("input-sterilized");
 const tbody = document.getElementById("tbody");
 
 let petList = JSON.parse(localStorage.getItem('petArr')) || []
-
-
+const breedListIndex = JSON.parse(localStorage.getItem('breedList')) || []
+console.log('breed list:', breedListIndex)
+console.log(breedListIndex.filter(b => b.type === ' Dog'))
 const formatDate = (date) => {
     const d = new Date(date);
     const day = String(d.getDate()).padStart(2, "0");
