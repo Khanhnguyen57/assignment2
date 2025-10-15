@@ -15,6 +15,29 @@ const findBtn = document.getElementById('find-btn')
 
 let petArr = JSON.parse(localStorage.getItem('petArr')) || []
 let findList = []
+const breedSearch = JSON.parse(localStorage.getItem('breedList'))
+
+const renderBreed = (type) => {
+    breedInput.innerHTML = '<option>Select Breed</option>';
+    const filteredBreeds = breedSearch.filter(b => b.Type === type);
+    filteredBreeds.forEach(b => {
+        const option = document.createElement('option');
+        option.value = b.Breed;
+        option.textContent = b.Breed;
+        breedInput.appendChild(option);
+    });
+};
+
+// Khi chọn Type -> cập nhật Breed tương ứng
+typeInput.addEventListener('change', function() {
+    const selectedType = this.value;
+    if (selectedType === 'Select Type') {
+        breedInput.innerHTML = '<option>Select Breed</option>';
+    } else {
+        renderBreed(selectedType);
+    }
+});
+
 const filterPets = () => {
     const idValue = idInput.value
     const nameValue = nameInput.value
