@@ -15,8 +15,11 @@ const tbody = document.getElementById("tbody");
 
 let petList = JSON.parse(localStorage.getItem('petArr')) || []
 const breedListIndex = JSON.parse(localStorage.getItem('breedList')) || []
+
 console.log('breed list:', breedListIndex)
-console.log(breedListIndex.filter(b => b.type === ' Dog'))
+console.log('Lọc:', breedListIndex.filter(b => b.Type === 'Dog'))
+
+
 const formatDate = (date) => {
     const d = new Date(date);
     const day = String(d.getDate()).padStart(2, "0");
@@ -24,6 +27,27 @@ const formatDate = (date) => {
     const year = d.getFullYear();
     return `${day}/${month}/${year}`;
 };
+
+const renderBreed = (type) => {
+    breedInput.innerHTML = '<option>Select Breed</option>';
+    const filteredBreeds = breedListIndex.filter(b => b.Type === type);
+    filteredBreeds.forEach(b => {
+        const option = document.createElement('option');
+        option.value = b.Breed;
+        option.textContent = b.Breed;
+        breedInput.appendChild(option);
+    });
+};
+
+// Khi chọn Type -> cập nhật Breed tương ứng
+typeInput.addEventListener('change', function() {
+    const selectedType = this.value;
+    if (selectedType === 'Select Type') {
+        breedInput.innerHTML = '<option>Select Breed</option>';
+    } else {
+        renderBreed(selectedType);
+    }
+});
 
 const renderList = (list) => {
     tbody.innerHTML = '';
